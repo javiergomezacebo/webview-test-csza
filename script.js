@@ -1,5 +1,5 @@
 // The API endpoint
-const apiUrl = 'https://api.tablemountain.net/v1/realtime-status?AttractionId=00000000-e169-4224-bb3c-1b88af3b1140';
+const apiUrl = 'https://table-mountain-proxy.javier-04d.workers.dev/';
 
 // Helper function to format HH:MM:SS into HH:MM
 const formatTime = (timeString) => {
