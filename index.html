@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status</title>
+    <style>
+        /* Basic reset and font settings */
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 16px; /* Base font size for a ~5" screen */
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Main status display */
+        .status {
+            font-size: 2.5em; /* 2.5 times the base size */
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        /* Conditions text (temp, visibility, etc.) */
+        .conditions {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #cccccc;
+        }
+
+        /* Grid for times */
+        .times-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .times-grid .header {
+            color: #cccccc;
+            font-size: 0.9em;
+        }
+        .times-grid .time {
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        /* Waiting times */
+        .waiting-times {
+            font-size: 1.1em;
+        }
+        .waiting-times .header {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="status" id="status">Loading...</div>
+
+    <div class="conditions">
+        The temperature is <span id="temperature">...</span> with <span id="visibility">...</span> visibility & <span id="wind">...</span> winds.
+    </div>
+
+    <div class="times-grid">
+        <div class="header">First up</div>
+        <div class="header">Last up</div>
+        <div class="header">Last down</div>
+        <div class="time" id="firstUp">--:--</div>
+        <div class="time" id="lastUp">--:--</div>
+        <div class="time" id="lastDown">--:--</div>
+    </div>
+
+    <div class="waiting-times">
+        <div class="header">Waiting times</div>
+        <div>
+            Lower: <span id="waitingBottom">--</span> mins | Upper: &le; <span id="waitingTop">--</span> mins
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>
