@@ -7,47 +7,82 @@
     <style>
         /* Basic reset and font settings */
         body {
-            background-color: #ffffff; /* Changed to white */
-            color: #333333; /* Changed text color for contrast on white background */
+            background-color: #ffffff;
+            color: #333333;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            font-size: 16px; /* Base font size for a ~5" screen */
+            font-size: 16px;
             margin: 0;
-            padding: 10px; /* Reduced padding for more compact fit */
+            padding: 10px;
             text-align: center;
-            height: 100px; /* Fixed height for the webview */
-            overflow: hidden; /* Hide anything that overflows the 100px height */
-            display: flex; /* Use flexbox to center content vertically */
+            height: 100px;
+            overflow: hidden;
+            display: flex;
             flex-direction: column;
-            justify-content: center; /* Center content vertically */
+            justify-content: center;
         }
 
         /* Main status display as a button */
         .status-button {
-            font-size: 1.8em; /* Adjusted font size for 100px height */
+            font-size: 1.8em;
             font-weight: bold;
-            margin-bottom: 5px; /* Reduced margin */
-            padding: 8px 15px; /* Padding for button appearance */
-            border-radius: 8px; /* Rounded corners for button */
-            color: #ffffff; /* White text for button */
-            display: inline-block; /* Make it behave like a block but size to content */
-            width: fit-content; /* Make button width fit content */
-            max-width: 90%; /* Ensure it doesn't overflow small screens */
-            margin-left: auto; /* Center the button */
-            margin-right: auto; /* Center the button */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow for button effect */
+            margin-bottom: 5px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            color: #ffffff;
+            display: inline-block;
+            width: fit-content;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
-        /* Specific colors for status buttons - will be applied by JavaScript */
+        /* Specific colors for status buttons */
         .status-open {
-            background-color: #4CAF50; /* Green for Open */
+            background-color: #4CAF50; /* Green */
         }
         .status-closed {
-            background-color: #f44336; /* Red for Closed */
+            background-color: #f44336; /* Red */
         }
 
-        /* Conditions text (temp, visibility, etc.) */
+        /* Conditions text */
         .conditions {
-            font-size: 0.8em; /* Smaller font size for conditions */
-            margin-bottom: 0; /* No bottom margin, keep it compact */
-            color: #666666; /* Darker grey for contrast */
-            line-height: 1.2; /* Tighter line spacing
+            font-size: 0.8em;
+            margin-bottom: 0;
+            color: #666666;
+            line-height: 1.2; /* Tighter line spacing */
+        }
+
+        .times-grid, .waiting-times {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="status-button" id="status">Loading...</div>
+
+    <div class="conditions">
+        The temperature is <span id="temperature">...</span> with <span id="visibility">...</span> visibility & <span id="wind">...</span> winds.
+    </div>
+
+    <div class="times-grid">
+        <div class="header">First up</div>
+        <div class="header">Last up</div>
+        <div class="header">Last down</div>
+        <div class="time" id="firstUp">--:--</div>
+        <div class="time" id="lastUp">--:--</div>
+        <div class="time" id="lastDown">--:--</div>
+    </div>
+
+    <div class="waiting-times">
+        <div class="header">Waiting times</div>
+        <div>
+            Lower: <span id="waitingBottom">--</span> mins | Upper: &le; <span id="waitingTop">--</span> mins
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+
+</body>
+</html>
