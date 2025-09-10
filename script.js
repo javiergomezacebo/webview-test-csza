@@ -1,5 +1,5 @@
 // The API endpoint
-const apiUrl = 'https://table-mountain-proxy.javier-04d.workers.dev/';
+const apiUrl = 'https://table-mountain-proxy.your-username.workers.dev'; // <<< Ensure this is your proxy URL!
 
 // Helper function to format HH:MM:SS into HH:MM
 const formatTime = (timeString) => {
@@ -23,12 +23,28 @@ async function updateStatus() {
         }
         const data = await response.json();
 
+        const statusElement = document.getElementById('status');
+
+        // 1. Update the status text
+        statusElement.textContent = data.status;
+
+        // 2. Dynamically apply the button color
+        // Remove previous status classes first
+        statusElement.classList.remove('status-open', 'status-closed');
+        if (data.status.toLowerCase() === 'open') {
+            statusElement.classList.add('status-open');
+        } else if (data.status.toLowerCase() === 'closed') {
+            statusElement.classList.add('status-closed');
+        }
+        // Add a default if there are other status types not explicitly handled
+
         // Update the HTML elements with the new data
-        document.getElementById('status').textContent = data.status;
         document.getElementById('temperature').textContent = data.temperature;
         document.getElementById('visibility').textContent = data.visibility;
         document.getElementById('wind').textContent = data.wind;
 
+        // These lines will execute, but the elements they target are hidden by CSS.
+        // If you later change your mind and make them visible, they'll be populated.
         document.getElementById('firstUp').textContent = formatTime(data.firstUp);
         document.getElementById('lastUp').textContent = formatTime(data.lastUp);
         document.getElementById('lastDown').textContent = formatTime(data.lastDown);
@@ -38,8 +54,10 @@ async function updateStatus() {
 
     } catch (error) {
         console.error("Failed to fetch data:", error);
-        document.getElementById('status').textContent = "Error";
-        // You could add more detailed error handling here
+        const statusElement = document.getElementById('status');
+        statusElement.textContent = "Error";
+        statusElement.classList.remove('status-open', 'status-closed'); // Clear colors on error
+        statusElement.style.backgroundColor = '#6c757d'; // Grey for error state
     }
 }
 
