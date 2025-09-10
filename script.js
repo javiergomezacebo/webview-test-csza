@@ -37,7 +37,8 @@ async function updateStatus() {
         // 2. Update all other data points
         document.getElementById('temperature').textContent = data.temperature;
         document.getElementById('visibility').textContent = data.visibility;
-        // The line for 'wind' has been removed
+        document.getElementById('wind').textContent = data.wind;
+
 
         document.getElementById('firstUp').textContent = formatTime(data.firstUp);
         // The line for 'lastUp' has been removed
