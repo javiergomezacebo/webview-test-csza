@@ -1,5 +1,5 @@
 // The API endpoint
-const apiUrl = 'https://table-mountain-proxy.javier-04d.workers.dev/'; // <<< Ensure this is your proxy URL!
+const apiUrl = 'https://table-mountain-proxy.javier-04d.workers.dev/';
 
 // Helper function to format HH:MM:SS into HH:MM
 const formatTime = (timeString) => {
@@ -8,7 +8,7 @@ const formatTime = (timeString) => {
 
 // Helper function to convert HH:MM:SS into total minutes
 const getMinutes = (timeString) => {
-    const parts = timeString.split(':'); // -> ["HH", "MM", "SS"]
+    const parts = timeString.split(':');
     const hours = parseInt(parts[0], 10);
     const minutes = parseInt(parts[1], 10);
     return (hours * 60) + minutes;
@@ -25,28 +25,22 @@ async function updateStatus() {
 
         const statusElement = document.getElementById('status');
 
-        // 1. Update the status text
+        // 1. Update the status text and color
         statusElement.textContent = data.status;
-
-        // 2. Dynamically apply the button color
-        // Remove previous status classes first
         statusElement.classList.remove('status-open', 'status-closed');
         if (data.status.toLowerCase() === 'open') {
             statusElement.classList.add('status-open');
         } else if (data.status.toLowerCase() === 'closed') {
             statusElement.classList.add('status-closed');
         }
-        // Add a default if there are other status types not explicitly handled
 
-        // Update the HTML elements with the new data
+        // 2. Update all other data points
         document.getElementById('temperature').textContent = data.temperature;
         document.getElementById('visibility').textContent = data.visibility;
-        document.getElementById('wind').textContent = data.wind;
+        // The line for 'wind' has been removed
 
-        // These lines will execute, but the elements they target are hidden by CSS.
-        // If you later change your mind and make them visible, they'll be populated.
         document.getElementById('firstUp').textContent = formatTime(data.firstUp);
-        document.getElementById('lastUp').textContent = formatTime(data.lastUp);
+        // The line for 'lastUp' has been removed
         document.getElementById('lastDown').textContent = formatTime(data.lastDown);
 
         document.getElementById('waitingBottom').textContent = getMinutes(data.waitingTimeBottom);
@@ -56,14 +50,13 @@ async function updateStatus() {
         console.error("Failed to fetch data:", error);
         const statusElement = document.getElementById('status');
         statusElement.textContent = "Error";
-        statusElement.classList.remove('status-open', 'status-closed'); // Clear colors on error
-        statusElement.style.backgroundColor = '#6c757d'; // Grey for error state
+        statusElement.classList.remove('status-open', 'status-closed');
+        statusElement.style.backgroundColor = '#6c757d';
     }
 }
 
 // Run the function when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     updateStatus();
-    // Refresh the data every 5 minutes (300,000 milliseconds)
     setInterval(updateStatus, 300000);
 });
