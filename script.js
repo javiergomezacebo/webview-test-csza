@@ -1,5 +1,5 @@
 // The API endpoint
-const apiUrl = 'https://table-mountain-proxy.your-username.workers.dev'; // <<< Ensure this is your proxy URL!
+const apiUrl = 'https://table-mountain-proxy.javier-04d.workers.dev/'; // <<< Ensure this is your proxy URL!
 
 // Helper function to format HH:MM:SS into HH:MM
 const formatTime = (timeString) => {
