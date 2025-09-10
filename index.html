@@ -10,75 +10,85 @@
             background-color: #ffffff;
             color: #333333;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            font-size: 16px;
+            /* Use a smaller base font size to fit more content */
+            font-size: 14px;
             margin: 0;
-            padding: 10px;
-            text-align: center;
+            padding: 8px;
             height: 100px;
             overflow: hidden;
+            /* Use flexbox to structure the main rows */
             display: flex;
             flex-direction: column;
             justify-content: center;
+            box-sizing: border-box;
         }
 
-        /* Main status display as a button */
+        /* Flexbox containers for rows */
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .top-row {
+            margin-bottom: 8px; /* Space between the two rows */
+        }
+
+        /* Status Button (now smaller) */
         .status-button {
-            font-size: 1.8em;
+            font-size: 1.5em; /* Reduced size */
             font-weight: bold;
-            margin-bottom: 5px;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 5px 12px; /* Reduced padding */
+            border-radius: 6px;
             color: #ffffff;
-            display: inline-block;
-            width: fit-content;
-            max-width: 90%;
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            margin-right: 10px; /* Space next to the button */
         }
-        
-        /* Specific colors for status buttons */
-        .status-open {
-            background-color: #4CAF50; /* Green */
-        }
-        .status-closed {
-            background-color: #f44336; /* Red */
-        }
+        .status-open { background-color: #4CAF50; }
+        .status-closed { background-color: #f44336; }
 
-        /* Conditions text */
-        .conditions {
-            font-size: 0.8em;
-            margin-bottom: 0;
-            color: #666666;
-            line-height: 1.2; /* Tighter line spacing */
+        /* General info block styling */
+        .info-block {
+            text-align: right; /* Align text to the right for a clean look */
         }
-
-        .times-grid, .waiting-times {
-            display: none;
+        .bottom-row .info-block {
+            text-align: left; /* Left align text in the bottom row */
+            font-size: 0.9em; /* Make text even smaller */
+            line-height: 1.3;
+        }
+        .info-title {
+            font-weight: bold;
+            color: #000000;
+        }
+        .info-data {
+            color: #555555;
         }
     </style>
 </head>
 <body>
 
-    <div class="status-button" id="status">Loading...</div>
-
-    <div class="conditions">
-        The temperature is <span id="temperature">...</span> with <span id="visibility">...</span> visibility & <span id="wind">...</span> winds.
+    <div class="row top-row">
+        <div class="status-button" id="status">...</div>
+        <div class="info-block" id="waiting-times">
+            <div class="info-title">Waiting Times</div>
+            <div class="info-data">
+                Lower: <span id="waitingBottom">--</span>m | Upper: &le;<span id="waitingTop">--</span>m
+            </div>
+        </div>
     </div>
 
-    <div class="times-grid">
-        <div class="header">First up</div>
-        <div class="header">Last up</div>
-        <div class="header">Last down</div>
-        <div class="time" id="firstUp">--:--</div>
-        <div class="time" id="lastUp">--:--</div>
-        <div class="time" id="lastDown">--:--</div>
-    </div>
-
-    <div class="waiting-times">
-        <div class="header">Waiting times</div>
-        <div>
-            Lower: <span id="waitingBottom">--</span> mins | Upper: &le; <span id="waitingTop">--</span> mins
+    <div class="row bottom-row">
+        <div class="info-block" id="operating-times">
+            <div class="info-title">Operating Times</div>
+            <div class="info-data">
+                <span id="firstUp">--:--</span> – <span id="lastDown">--:--</span>
+            </div>
+        </div>
+        <div class="info-block" id="conditions">
+            <div class="info-title">Conditions</div>
+            <div class="info-data">
+                <span id="temperature">...</span>, <span id="visibility">...</span>
+            </div>
         </div>
     </div>
     
